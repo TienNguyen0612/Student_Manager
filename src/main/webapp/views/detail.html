@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>
+        View Student
+    </title>
+    <style th:replace="/layout :: css"></style>
+</head>
+<body>
+<!--<h1 th:if="${message} != null">-->
+<!--    <span th:text="${message}"></span>-->
+<!--</h1>-->
+<table id="students" th:if="${student} != null">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Birth Date</th>
+        <th>Average Point</th>
+        <th>Image</th>
+        <th>Province</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${student.getName()}"></td>
+        <td th:text="${student.getBirthDate()}"></td>
+        <td th:text="${student.getAveragePoint()}"></td>
+        <td><img th:src="@{${file} + ${student.getImageUrl()}}" alt="Lỗi"></td>
+        <td th:text="${student.getProvince().getP_name()}"></td>
+    </tr>
+    </tbody>
+</table>
+<p><a th:href="@{/student}">Back to list</a></p>
+</body>
+</html>

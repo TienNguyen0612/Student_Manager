@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>
+        Product
+    </title>
+    <style th:replace="/layout :: css"></style>
+</head>
+<body>
+<h2 th:class="notify" th:if="${message} != null">
+    <span th:text="${message}"></span>
+</h2>
+<form id="form" th:action="@{/student/__${student.id}__}" th:object="${student}" method="post" enctype="multipart/form-data">
+    <label>Name:
+        <input type="text" name="name" th:field="*{name}">
+    </label>
+    <label>Birth Date:
+        <input type="text" name="birthDate" th:field="*{birthDate}">
+    </label>
+    <label>Average Point:
+        <input type="text" name="averagePoint" th:field="*{averagePoint}">
+    </label>
+    <label>Image:
+        <img th:src="@{${file} + ${student.getImageUrl()}}" alt="Error">
+        <input type="file" name="imageFile" th:field="*{imageFile}">
+    </label>
+    <br>
+    <br>
+    <label>Province:
+        <select th:field="*{province}"/>
+            <option th:each="p : ${provinces}" th:value="${p.p_id}" th:selected="${p.p_id} == *{province.p_id}">
+                <span th:text="${p.p_name}"></span>
+            </option>
+        </select>
+    </label>
+    <br>
+    <br>
+    <button type="submit">Submit</button>
+</form>
+<p><a th:href="@{/student}">Back to list</a></p>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
