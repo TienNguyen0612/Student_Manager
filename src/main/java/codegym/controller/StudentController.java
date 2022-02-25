@@ -6,6 +6,9 @@ import codegym.service.IProvinceService;
 import codegym.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +25,9 @@ public class StudentController {
     @Value("${file-upload}")
     private String fileUpload;
 
-    private final String view = "/images/";
+    @Value("${view}")
+    private String view;
+//    private final String view = "/images/";
 
     @Autowired
     private IStudentService studentService;
@@ -31,9 +36,9 @@ public class StudentController {
     private IProvinceService provinceService;
 
     @GetMapping
-    public ModelAndView showStudents() {
+    public ModelAndView showStudents(@PageableDefault(value = 2) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("list");
-        ArrayList<Student> students = studentService.findAll();
+        Page<Student> students = studentService.findAllInPage(pageable);
         if (students.isEmpty()) {
             modelAndView.addObject("message", "No Students !!!");
         }

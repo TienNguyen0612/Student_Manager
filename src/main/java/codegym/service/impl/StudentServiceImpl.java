@@ -4,6 +4,8 @@ import codegym.model.Student;
 import codegym.repository.IStudentRepository;
 import codegym.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -39,5 +41,10 @@ public class StudentServiceImpl implements IStudentService {
     @Override
     public ArrayList<Student> getAllStudentByName(String name) {
         return (ArrayList<Student>) studentRepository.findAllByNameContaining(name);
+    }
+
+    @Override
+    public Page<Student> findAllInPage(Pageable pageable) {
+        return studentRepository.findAll(pageable);
     }
 }
