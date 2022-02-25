@@ -17,14 +17,14 @@
     <label>Name:
         <input type="text" name="name" th:field="*{name}">
     </label>
-    <label>Birth Date:
+    <label>Birth Date (MM/dd/yyyy):
         <input type="text" name="birthDate" th:field="*{birthDate}">
     </label>
     <label>Average Point:
         <input type="text" name="averagePoint" th:field="*{averagePoint}">
     </label>
     <label>Image:
-        <img th:src="@{${file} + ${student.getImageUrl()}}" alt="Error">
+        <img th:src="@{${file} + ${student.getImageUrl()}}" alt="Error" src="">
         <input type="file" name="imageFile" th:field="*{imageFile}">
     </label>
     <br>
